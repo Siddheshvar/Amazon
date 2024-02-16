@@ -11,10 +11,17 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "categoryId",nullable = false)
     private Long catId;
+
+    @Column(name = "CategoryName")
     private String catName;
+
+    @Column(name = "CategoryDescription")
     private String catDescription;
-    private Float catPrice;
+
+
+    @Column(name = "CategoryLink")
     private String catLink;
 
 }

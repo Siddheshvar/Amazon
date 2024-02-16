@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService{
 
         existingCat.setCatName(category.getCatName());
         existingCat.setCatDescription(category.getCatDescription());
-        existingCat.setCatPrice(category.getCatPrice());
+//        existingCat.setCatPrice(category.getCatPrice());
         existingCat.setCatLink(category.getCatLink());
 
         return this.categoryRepository.save(existingCat);
