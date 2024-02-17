@@ -3,6 +3,8 @@ package com.example.Amazon.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Entity
 @Data
@@ -11,7 +13,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "categoryId",nullable = false)
+    @Column(name = "category_Id",nullable = false)
     private Long catId;
 
     @Column(name = "CategoryName")
@@ -23,5 +25,8 @@ public class Category {
 
     @Column(name = "CategoryLink")
     private String catLink;
+
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    private List<Products> products;
 
 }
