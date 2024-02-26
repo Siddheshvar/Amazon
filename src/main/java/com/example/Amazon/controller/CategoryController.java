@@ -18,31 +18,31 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping("/save")
-    public ResponseEntity<String>save(@RequestBody Category category){
-        categoryService.save(category);
-        return ResponseEntity.ok("Saved!");
+    public ResponseEntity<String> saveCategory(@RequestBody Category category){
+        categoryService.saveCategory(category);
+        return ResponseEntity.ok("Category is saved!");
     }
 
     @GetMapping("/getall")
-    public List<Category>getAll(){
-        return new ArrayList<Category>(categoryService.getAll());
+    public List<Category> getAllCategory(){
+        return new ArrayList<Category>(categoryService.getAllCategory());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Category>getById(@PathVariable("id")long id){
-        return new ResponseEntity<Category>(categoryService.getById(id), HttpStatus.OK);
+    public ResponseEntity<Category> getCategoryById(@PathVariable("id")long id){
+        return new ResponseEntity<Category>(categoryService.getCategoryById(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String>updateById(@RequestBody Category category,
-                                            @PathVariable("id")long id){
-        categoryService.updateById(category,id);
-        return ResponseEntity.ok("Updated category, Check in DB");
+    public ResponseEntity<String> updateCategoryById(@RequestBody Category category,
+                                                     @PathVariable("id")long id){
+        categoryService.updateCategoryById(category,id);
+        return ResponseEntity.ok("Category updated , \nPlease check in DB");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String>deleteById(@PathVariable("id")long id){
-        categoryService.deleteById(id);
-        return ResponseEntity.ok("Category Id no "+id+" deleted successfully!");
+    public ResponseEntity<String> deleteCategoryById(@PathVariable("id")long id){
+        categoryService.deleteCategoryById(id);
+        return ResponseEntity.ok("Category Id no "+id+" is deleted successfully!");
     }
 }

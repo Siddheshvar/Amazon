@@ -16,31 +16,31 @@ public class ProductsController {
     private ProductsService productsService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody Products products){
-        productsService.save(products);
-        return ResponseEntity.ok("Product details are saved in DB check ot out.");
+    public ResponseEntity<String> saveProducts(@RequestBody Products products){
+        productsService.saveProduct(products);
+        return ResponseEntity.ok("Product details are saved in DB,\nPlease check out.");
     }
 
     @GetMapping("/getall")
-    public List<Products> getAll(){
-        return new ArrayList<Products>(productsService.getAll());
+    public List<Products> getAllProducts(){
+        return new ArrayList<Products>(productsService.getAllProducts());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Products> getById(@PathVariable("id") long id){
-        return new ResponseEntity<Products>(productsService.getById(id), HttpStatus.OK);
+    public ResponseEntity<Products> getProductsById(@PathVariable("id") long id){
+        return new ResponseEntity<Products>(productsService.getProductById(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateById(@PathVariable("id")long id,
-                                             @RequestBody Products products){
-        productsService.updateById(products,id);
+    public ResponseEntity<String> updateProductsById(@PathVariable("id")long id,
+                                                     @RequestBody Products products){
+        productsService.updateProductById(products,id);
         return ResponseEntity.ok("Product details of id "+id+" are updated!");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable("id") long id){
-        productsService.deleteById(id);
-        return ResponseEntity.ok("Product details of is "+id+" are deleted successfully!");
+    public ResponseEntity<String> deleteProductsById(@PathVariable("id") long id){
+        productsService.deleteProductById(id);
+        return ResponseEntity.ok("Product details of id no "+id+" are deleted successfully!");
     }
 }

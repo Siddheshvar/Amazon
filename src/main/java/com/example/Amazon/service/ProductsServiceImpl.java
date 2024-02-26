@@ -12,23 +12,23 @@ public class ProductsServiceImpl implements ProductsService{
     private ProductsRepository productsRepository;
 
     @Override
-    public Products save(Products products) {
+    public Products saveProduct(Products products) {
         return this.productsRepository.save(products);
     }
 
     @Override
-    public List<Products> getAll() {
+    public List<Products> getAllProducts() {
         return this.productsRepository.findAll();
     }
 
     @Override
-    public Products getById(long id) {
+    public Products getProductById(long id) {
         return this.productsRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
     }
 
     @Override
-    public Products updateById(Products products, long id) {
+    public Products updateProductById(Products products, long id) {
         Products existingPr = productsRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
 
@@ -41,7 +41,7 @@ public class ProductsServiceImpl implements ProductsService{
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteProductById(long id) {
         productsRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
         productsRepository.deleteById(id);

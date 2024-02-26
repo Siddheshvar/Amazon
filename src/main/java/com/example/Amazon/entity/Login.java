@@ -1,7 +1,8 @@
 package com.example.Amazon.entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
+import javax.persistence.*;
+
 
 @Entity
 @Data
@@ -13,4 +14,5 @@ public class Login {
     private Long id;
     private String emailId;
     private String password;
+
 }

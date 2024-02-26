@@ -13,23 +13,23 @@ public class SignUpServiceImpl implements SignUpService{
     private SignUpRepository signUpRepository;
 
     @Override
-    public SignUp save(SignUp signUp) {
+    public SignUp saveSignUp(SignUp signUp) {
         return this.signUpRepository.save(signUp);
     }
 
     @Override
-    public List<SignUp> getAll() {
+    public List<SignUp> getAllSignUps() {
         return this.signUpRepository.findAll();
     }
 
     @Override
-    public SignUp getById(long id) {
+    public SignUp getSignUpById(long id) {
         return this.signUpRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
     }
 
     @Override
-    public SignUp updateById(SignUp signUp, long id) {
+    public SignUp updateSignUpById(SignUp signUp, long id) {
         SignUp oldSignUp = signUpRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
 
@@ -42,7 +42,7 @@ public class SignUpServiceImpl implements SignUpService{
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteSignUpById(long id) {
         signUpRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
         signUpRepository.deleteById(id);

@@ -17,31 +17,31 @@ public class SignUpController {
     private SignUpService signUpService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody SignUp signUp){
-        signUpService.save(signUp);
+    public ResponseEntity<String> saveSignUp(@RequestBody SignUp signUp){
+        signUpService.saveSignUp(signUp);
         return ResponseEntity.ok("You have successfully signed Up!");
     }
 
     @GetMapping("/getall")
-    public List<SignUp> getall(){
-        return new ArrayList<SignUp>(signUpService.getAll());
+    public List<SignUp> getAllSignUp(){
+        return new ArrayList<SignUp>(signUpService.getAllSignUps());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<SignUp> getById(@PathVariable("id")long id){
-        return new ResponseEntity<SignUp>(signUpService.getById(id),HttpStatus.OK);
+    public ResponseEntity<SignUp> getSignUpById(@PathVariable("id")long id){
+        return new ResponseEntity<SignUp>(signUpService.getSignUpById(id),HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateById(@RequestBody SignUp signUp,
-                                             @PathVariable("id")long id){
-        signUpService.updateById(signUp,id);
-        return ResponseEntity.ok("ID "+id+"'s signup details updated! check in DB");
+    public ResponseEntity<String> updateSignUpById(@RequestBody SignUp signUp,
+                                                   @PathVariable("id")long id){
+        signUpService.updateSignUpById(signUp,id);
+        return ResponseEntity.ok("ID "+id+"'s signup details are updated! please check in DB");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable("id")long id){
-        signUpService.deleteById(id);
+    public ResponseEntity<String> deleteSignUpById(@PathVariable("id")long id){
+        signUpService.deleteSignUpById(id);
         return ResponseEntity.ok("Signup details of ID "+id+" are successfully deleted!");
     }
 }

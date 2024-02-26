@@ -16,31 +16,31 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/save")
-    public ResponseEntity<String>save(@RequestBody Login login){
-        loginService.save(login);
-        return ResponseEntity.ok("You have successfully logged in!");
+    public ResponseEntity<String> saveLogin(@RequestBody Login login){
+        loginService.saveLogin(login);
+        return ResponseEntity.ok("You're logged in successfully!");
     }
 
     @GetMapping("/getall")
-    public List<Login> getAll(){
-        return new ArrayList<Login>(loginService.getAll());
+    public List<Login> getAllLogin(){
+        return new ArrayList<Login>(loginService.getAllLogin());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Login>getById(@PathVariable("id")long id){
-        return new ResponseEntity<Login>(loginService.getById(id), HttpStatus.OK);
+    public ResponseEntity<Login> getLoginById(@PathVariable("id")long id){
+        return new ResponseEntity<Login>(loginService.getLoginById(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String>updateById(@RequestBody Login login,
-                                            @PathVariable("id")long id){
-        Login oldLogin = loginService.updateById(login,id);
-        return ResponseEntity.ok("ID "+id+"'s login details updated! check in DB");
+    public ResponseEntity<String> updateLoginById(@RequestBody Login login,
+                                                  @PathVariable("id")long id){
+        Login oldLogin = loginService.updateLoginById(login,id);
+        return ResponseEntity.ok("ID "+id+"'s login details are updated! please check in DB");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String>deleteById(@PathVariable("id")long id){
-        loginService.deleteById(id);
+    public ResponseEntity<String> deleteLoginById(@PathVariable("id")long id){
+        loginService.deleteLoginById(id);
         return ResponseEntity.ok("Login details of ID "+id+" are successfully deleted!");
     }
 }

@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface LoginService {
 
-    Login save(Login login);
-    List<Login> getAll();
-    Login getById(long id);
-    Login updateById(Login login,long id);
-    void deleteById(long id);
+    Login saveLogin(Login login);
+    List<Login> getAllLogin();
+    Login getLoginById(long id);
+    Login updateLoginById(Login login, long id);
+    void deleteLoginById(long id);
 }

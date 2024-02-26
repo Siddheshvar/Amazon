@@ -14,23 +14,23 @@ public class LoginServiceImpl implements LoginService{
     private LoginRepository loginRepository;
 
     @Override
-    public Login save(Login login) {
+    public Login saveLogin(Login login) {
         return this.loginRepository.save(login);
     }
 
     @Override
-    public List<Login> getAll() {
+    public List<Login> getAllLogin() {
         return this.loginRepository.findAll();
     }
 
     @Override
-    public Login getById(long id) {
+    public Login getLoginById(long id) {
         return this.loginRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
     }
 
     @Override
-    public Login updateById(@NotNull Login login, long id) {
+    public Login updateLoginById(@NotNull Login login, long id) {
         Login oldLogin = loginRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
 
@@ -41,7 +41,7 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteLoginById(long id) {
         loginRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
         loginRepository.deleteById(id);

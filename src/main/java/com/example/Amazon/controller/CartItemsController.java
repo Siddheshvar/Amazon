@@ -16,9 +16,9 @@ public class CartItemsController {
     private CartItemsService cartItemsService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody CartItems items){
+    public ResponseEntity<String> saveCartItem(@RequestBody CartItems items){
         cartItemsService.saveItem(items);
-        return ResponseEntity.ok("Cart items saved!");
+        return ResponseEntity.ok("Cart items are saved!");
     }
 
     @GetMapping("/getall")
@@ -27,20 +27,20 @@ public class CartItemsController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<CartItems> getById(@PathVariable("id")long id){
+    public ResponseEntity<CartItems> getCartItemById(@PathVariable("id")long id){
         return new ResponseEntity<CartItems>(cartItemsService.getItemById(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateById(@PathVariable("id")long id,
-                                             @RequestBody CartItems items){
+    public ResponseEntity<String> updateCartItemById(@PathVariable("id")long id,
+                                                     @RequestBody CartItems items){
         cartItemsService.updateItemById(items,id);
-        return ResponseEntity.ok("Cart Item of ID "+id+" are updated!");
+        return ResponseEntity.ok("Cart Item details of ID no "+id+" are updated! \nplease check in DB");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable("id")long id){
+    public ResponseEntity<String> deleteCartItemById(@PathVariable("id")long id){
         cartItemsService.deleteItemById(id);
-        return ResponseEntity.ok("cart item of ID "+id+" are updated!");
+        return ResponseEntity.ok("cart item of ID "+id+" is deleted!");
     }
 }

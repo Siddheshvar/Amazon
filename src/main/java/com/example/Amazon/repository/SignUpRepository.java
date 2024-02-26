@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SignUpRepository extends JpaRepository<SignUp,Long> {
-//    void deleteById(long );
+//    void deleteCartById(long );
 }
