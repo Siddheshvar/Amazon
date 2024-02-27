@@ -7,25 +7,17 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Category")
+@Table(name = "category")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_Id",nullable = false)
-    private Long catId;
+    @Column(name = "category_Id")
+    private Long categoryId;
 
-    @Column(name = "CategoryName")
-    private String catName;
+    private String categoryName;
+    private String categoryDescription;
+    private String categoryLink;
 
-    @Column(name = "CategoryDescription")
-    private String catDescription;
-
-
-    @Column(name = "CategoryLink")
-    private String catLink;
-
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    private List<Products> products;
 
 }

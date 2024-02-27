@@ -3,17 +3,17 @@ package com.example.Amazon.entity;
 import lombok.Data;
 import javax.persistence.*;
 
-
 @Entity
 @Data
-@Table(name = "login")
-public class Login {
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    private String emailId;
-    private String password;
+    private Integer itemQuantity;
 
+    @ManyToOne
+    @JoinColumn(name = "order_Id")
+    private Orders orders;
 }

@@ -1,33 +1,24 @@
 package com.example.Amazon.entity;
 
-
 import lombok.Data;
 import javax.persistence.*;
 
-
 @Entity
 @Data
-@Table(name = "Products")
+@Table(name = "products")
 public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ProductId")
-    private Long prId;
+    @Column(name = "product_Id")
+    private Long productId;
 
-    @Column(name = "ProductName")
-    private String prName;
-
-    @Column(name = "ProductDescription")
-    private String prDescription;
-
-    @Column(name = "ProductPrice")
-    private Float prPrice;
-
-    @Column(name = "ProductLink")
-    private String prLink;
+    private String productName;
+    private String productDescription;
+    private Float productPrice;
+    private String productLink;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "category_Id")
     private Category category;
 }

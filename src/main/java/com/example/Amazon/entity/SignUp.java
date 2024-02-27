@@ -6,14 +6,16 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "signup")
+@Table(name = "customer")
 public class SignUp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "customer_Id")
+    private Long customerId;
+
     private String fullName;
-    private Long phoneNo;
+    private Integer phoneNo;
     private String emailId;
     private String createPass;
 }

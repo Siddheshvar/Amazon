@@ -1,22 +1,24 @@
 package com.example.Amazon.entity;
 
-
 import lombok.Data;
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
-@Table(name = "cart")
-public class Cart {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_Id")
-    private Long cartId;
+    @Column(name = "payment_Id")
+    private Integer paymentId;
+
+    private Double Amount;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Orders orders;
 
     @ManyToOne
     @JoinColumn(name = "customer_Id")
     private SignUp signUp;
-
 }
