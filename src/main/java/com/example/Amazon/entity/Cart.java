@@ -1,9 +1,7 @@
 package com.example.Amazon.entity;
 
-
 import lombok.Data;
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -17,6 +15,6 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "customer_Id")
-    private SignUp signUp;
+    private Customer customer;
 
 }

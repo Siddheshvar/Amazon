@@ -26,6 +26,6 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "customer_Id",nullable = false)
-    private SignUp signUp;
+    private Customer customer;
 
 }

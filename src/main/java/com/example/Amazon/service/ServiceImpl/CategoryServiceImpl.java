@@ -1,14 +1,15 @@
-package com.example.Amazon.service;
+package com.example.Amazon.service.ServiceImpl;
 
 import com.example.Amazon.entity.Category;
 import com.example.Amazon.repository.CategoryRepository;
+import com.example.Amazon.service.CategoryService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -33,10 +34,9 @@ public class CategoryServiceImpl implements CategoryService{
         Category existingCat = categoryRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
 
-        existingCat.setCatName(category.getCatName());
-        existingCat.setCatDescription(category.getCatDescription());
-//        existingCat.setCatPrice(category.getCatPrice());
-        existingCat.setCatLink(category.getCatLink());
+        existingCat.setCategoryName(category.getCategoryName());
+        existingCat.setCategoryDescription(category.getCategoryDescription());
+        existingCat.setCategoryLink(category.getCategoryLink());
 
         return this.categoryRepository.save(existingCat);
     }
