@@ -14,6 +14,7 @@ public class Products {
     private Long productId;
 
     private String productName;
+    private String brand;
     private String productDescription;
     private Float productPrice;
     private String productLink;

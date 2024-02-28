@@ -1,12 +1,14 @@
 package com.example.Amazon.entity;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Data
-public class Orders {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_Id")
@@ -21,6 +23,6 @@ public class Orders {
 
     @ManyToOne
     @JoinColumn(name = "customer_Id")
-    private SignUp signUp;
+    private Customer customer;
 
 }

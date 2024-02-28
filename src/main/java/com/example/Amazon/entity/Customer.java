@@ -1,13 +1,13 @@
 package com.example.Amazon.entity;
 
-
 import lombok.Data;
 import javax.persistence.*;
+
 
 @Entity
 @Data
 @Table(name = "customer")
-public class SignUp {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
