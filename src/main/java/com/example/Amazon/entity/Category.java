@@ -20,6 +20,7 @@ public class Category {
     private String categoryLink;
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_Id")
     private List<Products> products;
 
 
