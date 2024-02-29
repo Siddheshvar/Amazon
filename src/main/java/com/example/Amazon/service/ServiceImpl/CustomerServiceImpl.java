@@ -26,13 +26,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer getSignUpById(long id) {
         return this.customerRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Data not found!"));
+                new RuntimeException("Oops... customer details not found!"));
     }
 
     @Override
     public Customer updateSignUpById(Customer customer, long id) {
         Customer oldCustomer = customerRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Data not found!"));
+                new RuntimeException("Oops... customer details found to update!"));
 
         oldCustomer.setFullName(oldCustomer.getFullName());
         oldCustomer.setPhoneNo(customer.getPhoneNo());
@@ -45,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteSignUpById(long id) {
         customerRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Data not found!"));
+                new RuntimeException("Oops... customer details not found to delete!"));
         customerRepository.deleteById(id);
     }
 }

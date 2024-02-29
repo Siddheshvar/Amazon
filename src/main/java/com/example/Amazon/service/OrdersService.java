@@ -7,6 +7,7 @@ public interface OrdersService {
     Order saveOrder(Order order);
     List<Order> getAllOrder();
     Order getOrderById(Integer id);
-    Order updateOrderById(Order order);
+    Order updateOrderById(Order order,Integer id);
+
     void deleteOrderById(Integer id);
 }

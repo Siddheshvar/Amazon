@@ -27,13 +27,13 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Login getLoginById(long id) {
         return loginRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Data not found!"));
+                new RuntimeException("Oops... login details not found!"));
     }
 
     @Override
     public Login updateLoginById(@NotNull Login login, long id) {
         Login oldLogin = loginRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Data not found!"));
+                new RuntimeException("Oops... login details not found to update!"));
 
         oldLogin.setEmailId(login.getEmailId());
         oldLogin.setPassword(login.getPassword());
@@ -44,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public void deleteLoginById(long id) {
         loginRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Data not found!"));
+                new RuntimeException("Oops... login details not found to delete!"));
         loginRepository.deleteById(id);
     }
 }

@@ -26,13 +26,13 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address getAddressById(Integer id) {
         return addressRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Address not found!"));
+                new RuntimeException("Oops... address not found!"));
     }
 
     @Override
     public Address updateAddressById(@NotNull Address address, Integer id) {
         Address oldAddress = addressRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Address not found!"));
+                new RuntimeException("Oops... address not found to update!"));
 
         oldAddress.setFlatOrHouseNo(address.getFlatOrHouseNo());
         oldAddress.setResidencyOrApartment(address.getResidencyOrApartment());
@@ -51,7 +51,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void deleteAddressById(Integer id) {
         addressRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Address not found!"));
+                new RuntimeException("Oops... address not found to delete!"));
         addressRepository.deleteById(id);
     }
 }

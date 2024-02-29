@@ -19,21 +19,27 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<Cart> getAllCart() {
-        return null;
+        return cartRepository.findAll();
     }
 
     @Override
     public Cart getCartById(Long id) {
-        return null;
+        return cartRepository.findById(id).orElseThrow(()->
+                new RuntimeException("Oops... cart not found!"));
     }
 
     @Override
     public Cart updateCartById(Cart cart, Long id) {
+        Cart oldCart = cartRepository.findById(id).orElseThrow(()->
+                new RuntimeException("Oops... cart not found to update!"));
+
         return null;
     }
 
     @Override
     public void deleteCartById(Long id) {
-
+        cartRepository.findById(id).orElseThrow(()->
+                new RuntimeException("Oops... cart items not found to delete!"));
+        cartRepository.deleteById(id);
     }
 }

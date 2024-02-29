@@ -25,13 +25,13 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public Products getProductById(long id) {
         return this.productsRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Data not found!"));
+                new RuntimeException("Oops... products not found!"));
     }
 
     @Override
     public Products updateProductById(Products products, long id) {
         Products existingPr = productsRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Data not found!"));
+                new RuntimeException("Oops... product not found to update!"));
 
         existingPr.setProductName(products.getProductName());
         existingPr.setBrand(products.getBrand());
@@ -45,7 +45,7 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public void deleteProductById(long id) {
         productsRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Data not found!"));
+                new RuntimeException("Oops... product not found delete!"));
         productsRepository.deleteById(id);
     }
 }
