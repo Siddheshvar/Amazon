@@ -2,6 +2,7 @@ package com.example.Amazon.entity;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -17,6 +18,10 @@ public class Category {
     private String categoryName;
     private String categoryDescription;
     private String categoryLink;
+
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    private List<Products> products;
+
 
 
 }
