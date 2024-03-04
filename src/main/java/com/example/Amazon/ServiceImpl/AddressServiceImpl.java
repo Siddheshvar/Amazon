@@ -1,4 +1,4 @@
-package com.example.Amazon.service.ServiceImpl;
+package com.example.Amazon.ServiceImpl;
 
 import com.example.Amazon.entity.Address;
 import com.example.Amazon.repository.AddressRepository;

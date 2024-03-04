@@ -24,8 +24,8 @@ public class Address {
     private String state;
     private String country;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_Id",nullable = false)
-    private Customer customer;
+//    @ManyToOne
+//    @JoinColumn(name = "customer_Id",nullable = false)
+//    private Customer customer;
 
 }
