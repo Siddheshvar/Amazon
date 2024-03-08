@@ -1,7 +1,6 @@
 package com.example.Amazon.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
@@ -9,15 +8,15 @@ import javax.persistence.*;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer paymentId;
-
+    private Integer id;
+    private String paymentMethod;
     private Double Amount;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    @ManyToOne
+//    @ManyToOne
+//    @JoinColumn(name = "order_id")
+//    private Order order;
+//
+    @OneToOne
     @JoinColumn(name = "customer_Id")
     private Customer customer;
 }

@@ -10,8 +10,7 @@ public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_Id")
-    private Long productId;
+    private Integer id;
 
     private String productName;
     private String brand;
@@ -20,7 +19,7 @@ public class Products {
     private String productLink;
 
     @ManyToOne
-    @JoinColumn(name = "category_Id")
+    @JoinColumn(name = "categoryId")
     private Category category;
 
  }

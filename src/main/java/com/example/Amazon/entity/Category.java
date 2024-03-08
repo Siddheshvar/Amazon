@@ -11,18 +11,11 @@ import java.util.List;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_Id")
-    private Long categoryId;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     private String categoryName;
     private String categoryDescription;
     private String categoryLink;
-
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_Id")
-    private List<Products> products;
-
 
 
 }

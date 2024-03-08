@@ -11,15 +11,15 @@ import java.util.Date;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_Id")
-    private Integer orderId;
+    private Integer id;
 
     private Date orderDate;
     private Float totalAmount;
 
-    @OneToOne
-    @JoinColumn(name = "address_Id")
-    private Address address;
+//    @OneToOne
+//    @JoinColumn(name = "address_Id")
+//    private Address address;
+//
 
     @ManyToOne
     @JoinColumn(name = "customer_Id")

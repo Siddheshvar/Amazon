@@ -2,6 +2,7 @@ package com.example.Amazon.entity;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -11,11 +12,13 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_Id")
-    private Long customerId;
+    private Long id;
 
     private String fullName;
     private Integer phoneNo;
     private String emailId;
     private String createPass;
+
+//    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+//    List<Cart> cart;
 }
