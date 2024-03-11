@@ -12,11 +12,11 @@ public class Payment {
     private String paymentMethod;
     private Double Amount;
 
-//    @ManyToOne
-//    @JoinColumn(name = "order_id")
-//    private Order order;
-//
     @OneToOne
-    @JoinColumn(name = "customer_Id")
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 }

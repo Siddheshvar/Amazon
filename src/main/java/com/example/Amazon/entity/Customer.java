@@ -8,17 +8,22 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "customer")
-public class Customer {
+public class    Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String fullName;
-    private Integer phoneNo;
+    private String phoneNo;
     private String emailId;
     private String createPass;
 
-//    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-//    List<Cart> cart;
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    List<Order> orders;
+
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private List<Address> addresses;
+
+
 }

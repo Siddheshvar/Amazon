@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "order_item")
+@Table(name = "order_items")
 public class OrderItem {
 
     @Id
@@ -14,11 +14,11 @@ public class OrderItem {
 
     private Integer itemQuantity;
 
-//    @ManyToOne
-//    @JoinColumn(name = "product_Id")
-//    private Products products;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "order_Id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
     private Order order;
 }

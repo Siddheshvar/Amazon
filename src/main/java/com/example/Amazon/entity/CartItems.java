@@ -16,10 +16,10 @@ public class CartItems {
 
 //    @ManyToOne
 //    @JoinColumn(name = "product_Id")
-//    private Products products;
+//    private Product products;
 //
     @ManyToOne
-    @JoinColumn(name = "cart_Id")
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
 }

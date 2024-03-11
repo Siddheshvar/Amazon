@@ -16,13 +16,12 @@ public class Order {
     private Date orderDate;
     private Float totalAmount;
 
-//    @OneToOne
-//    @JoinColumn(name = "address_Id")
-//    private Address address;
-//
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address shippingAddress;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_Id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
 }
