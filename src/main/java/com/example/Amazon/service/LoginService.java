@@ -1,14 +1,8 @@
 package com.example.Amazon.service;
 
-import com.example.Amazon.entity.Login;
-
-import java.util.List;
+import com.example.Amazon.Requests.LoginRequest;
+import com.example.Amazon.Response.LoginResponse;
 
 public interface LoginService {
-
-    Login saveLogin(Login login);
-    List<Login> getAllLogin();
-    Login getLoginById(long id);
-    Login updateLoginById(Login login, long id);
-    void deleteLoginById(long id);
+    LoginResponse authenticateUser(LoginRequest loginRequest);
 }
