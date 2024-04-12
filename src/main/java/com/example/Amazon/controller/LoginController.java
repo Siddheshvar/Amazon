@@ -19,7 +19,8 @@ public class LoginController {
 
     @PostMapping("/login")
     public LoginResponse authenticateUser(@RequestBody LoginRequest loginRequest){
-        return loginService.authenticateUser(loginRequest);
+        loginService.authenticateUser(loginRequest);
+        return new LoginResponse(200,"You are logged in successfully",null);
     }
 
 }
