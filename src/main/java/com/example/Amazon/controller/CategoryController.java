@@ -1,5 +1,7 @@
 package com.example.Amazon.controller;
 
+import com.example.Amazon.Requests.CategoryRequest;
+import com.example.Amazon.Response.BaseResponse;
 import com.example.Amazon.entity.Category;
 import com.example.Amazon.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,31 +20,28 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveCategory(@RequestBody Category category){
-        categoryService.saveCategory(category);
-        return ResponseEntity.ok("Category is saved!");
+    public BaseResponse saveCategory(@RequestBody CategoryRequest categoryRequest){
+        return categoryService.saveCategory(categoryRequest);
     }
 
-    @GetMapping("/getall")
-    public List<Category> getAllCategory(){
-        return new ArrayList<Category>(categoryService.getAllCategory());
+    @GetMapping("/getAll")
+    public BaseResponse<List<Category>> getAllCategory(){
+        return categoryService.getAllCategory();
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable("id")long id){
-        return new ResponseEntity<Category>(categoryService.getCategoryById(id), HttpStatus.OK);
+    public BaseResponse getCategoryById(@PathVariable("id")Integer id){
+        return categoryService.getCategoryById(id);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateCategoryById(@RequestBody Category category,
-                                                     @PathVariable("id")long id){
-        categoryService.updateCategoryById(category,id);
-        return ResponseEntity.ok("Category updated , \nPlease check in DB");
+    public BaseResponse updateCategoryById(@RequestBody CategoryRequest categoryRequest,
+                                                     @PathVariable("id")Integer id){
+        return categoryService.updateCategoryById(categoryRequest,id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteCategoryById(@PathVariable("id")long id){
-        categoryService.deleteCategoryById(id);
-        return ResponseEntity.ok("Category Id no "+id+" is deleted successfully!");
+    public BaseResponse deleteCategoryById(@PathVariable("id")Integer id){
+        return categoryService.deleteCategoryById(id);
     }
 }

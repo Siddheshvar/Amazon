@@ -2,6 +2,7 @@ package com.example.Amazon.entity;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -15,9 +16,12 @@ public class Category {
     private Integer id;
     private String categoryName;
     private String categoryDescription;
-    private String categoryLink;
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private List<Product> products;
 
+
+    private Boolean isDeleted;
+    private Date createOn;
+    private Date updateOn;
 }
