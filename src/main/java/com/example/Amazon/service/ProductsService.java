@@ -1,13 +1,16 @@
 package com.example.Amazon.service;
 
-import com.example.Amazon.entity.Products;
+import com.example.Amazon.Requests.ProductRequest;
+import com.example.Amazon.Response.BaseResponse;
+import com.example.Amazon.Response.ProductResponse;
 
 import java.util.List;
 
 public interface ProductsService {
-    Products saveProduct(Products products);
-    List<Products> getAllProducts();
-    Products getProductById(long id);
-    Products updateProductById(Products products, long id);
-    void deleteProductById(long id);
+    BaseResponse saveProduct(ProductRequest productRequest);
+    BaseResponse<List<ProductResponse>> getAllProducts();
+    BaseResponse getProductById(Integer id);
+    BaseResponse updateProductById(ProductRequest productRequest, Integer id);
+    BaseResponse deleteProductById(Integer id);
+    BaseResponse<List<ProductResponse>> getAllProductsByCategory(String category);
 }

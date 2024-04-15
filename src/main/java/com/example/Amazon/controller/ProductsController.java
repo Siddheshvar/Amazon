@@ -1,6 +1,8 @@
 package com.example.Amazon.controller;
 
-import com.example.Amazon.entity.Products;
+import com.example.Amazon.Requests.ProductRequest;
+import com.example.Amazon.Response.BaseResponse;
+import com.example.Amazon.entity.Product;
 import com.example.Amazon.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,31 +18,33 @@ public class ProductsController {
     private ProductsService productsService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveProducts(@RequestBody Products products){
-        productsService.saveProduct(products);
-        return ResponseEntity.ok("Product details are saved in DB,\nPlease check out.");
+    public BaseResponse saveProducts(@RequestBody ProductRequest productsRequest){
+        return productsService.saveProduct(productsRequest);
     }
 
-    @GetMapping("/getall")
-    public List<Products> getAllProducts(){
-        return new ArrayList<Products>(productsService.getAllProducts());
+    @GetMapping("/getAll")
+    public BaseResponse getAllProducts(){
+        return productsService.getAllProducts();
+    }
+
+    @GetMapping("/getCatProduct")
+    public BaseResponse getAllProductsByCategory(@RequestParam String category){
+        return productsService.getAllProductsByCategory(category);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Products> getProductsById(@PathVariable("id") long id){
-        return new ResponseEntity<Products>(productsService.getProductById(id), HttpStatus.OK);
+    public BaseResponse getProductsById(@PathVariable("id") Integer id){
+        return productsService.getProductById(id);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateProductsById(@PathVariable("id")long id,
-                                                     @RequestBody Products products){
-        productsService.updateProductById(products,id);
-        return ResponseEntity.ok("Product details of id "+id+" are updated!");
+    public BaseResponse updateProductsById(@PathVariable("id")Integer id,
+                                                     @RequestBody ProductRequest productsRequest){
+        return productsService.updateProductById(productsRequest, id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteProductsById(@PathVariable("id") long id){
-        productsService.deleteProductById(id);
-        return ResponseEntity.ok("Product details of id no "+id+" are deleted successfully!");
+    public BaseResponse deleteProductsById(@PathVariable("id") Integer id){
+        return productsService.deleteProductById(id);
     }
 }
