@@ -2,6 +2,7 @@ package com.example.Amazon.ServiceImpl;
 
 import com.example.Amazon.Requests.CategoryRequest;
 import com.example.Amazon.Response.BaseResponse;
+import com.example.Amazon.Response.CategoryResponse;
 import com.example.Amazon.entity.Category;
 import com.example.Amazon.repository.CategoryRepository;
 import com.example.Amazon.service.CategoryService;
@@ -9,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,13 +37,21 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public BaseResponse<List<Category>> getAllCategory() {
-        List<Category> category = categoryRepository.findAll();
-        if (!category.isEmpty()){
-            List<Category> categoryArrayList = categoryRepository.findAll();
+    public BaseResponse<List<CategoryResponse>> getAllCategory() {
+        List<Category> categoryList = categoryRepository.findAll();
+        if (!categoryList.isEmpty()){
+            List<CategoryResponse> categoryArrayList = new ArrayList<>();
+            for (Category category : categoryList) {
+                CategoryResponse categoryResponse = new CategoryResponse();
+                categoryResponse.setId(category.getId());
+                categoryResponse.setCategoryName(category.getCategoryName());
+                categoryResponse.setCategoryDescription(category.getCategoryDescription());
+
+                categoryArrayList.add(categoryResponse);
+            }
             return new BaseResponse(200, "Category retrieved successfully", categoryArrayList);
         }else {
-            return new BaseResponse(404, "No category found", null);
+            return new BaseResponse(404, "No categoryList found", null);
         }
     }
 
@@ -49,10 +59,13 @@ public class CategoryServiceImpl implements CategoryService {
     public BaseResponse getCategoryById(Integer id) {
         Optional<Category> category = categoryRepository.findByIsDeletedAndId(false,id);
         if (category.isPresent()){
-            Category category1 = categoryRepository.findById(id).get();
-            return new BaseResponse(200, "Category retrieved successfully", category1);
+            CategoryResponse categoryResponse = new CategoryResponse();
+            categoryResponse.setId(category.get().getId());
+            categoryResponse.setCategoryName(category.get().getCategoryName());
+            categoryResponse.setCategoryDescription(category.get().getCategoryDescription());
+            return new BaseResponse(200, "Category retrieved successfully", categoryResponse);
         }else{
-            return new BaseResponse(404,"No category found",null);
+            return new BaseResponse(404,    "No category found",null);
         }
     }
 

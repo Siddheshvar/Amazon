@@ -2,14 +2,11 @@ package com.example.Amazon.controller;
 
 import com.example.Amazon.Requests.CategoryRequest;
 import com.example.Amazon.Response.BaseResponse;
-import com.example.Amazon.entity.Category;
+import com.example.Amazon.Response.CategoryResponse;
 import com.example.Amazon.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,7 +22,7 @@ public class CategoryController {
     }
 
     @GetMapping("/getAll")
-    public BaseResponse<List<Category>> getAllCategory(){
+    public BaseResponse<List<CategoryResponse>> getAllCategory(){
         return categoryService.getAllCategory();
     }
 

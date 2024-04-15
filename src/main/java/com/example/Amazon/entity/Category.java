@@ -1,5 +1,6 @@
 package com.example.Amazon.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
@@ -17,9 +18,9 @@ public class Category {
     private String categoryName;
     private String categoryDescription;
 
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    private List<Product> products;
-
+////    @JsonIgnore
+//    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+//    private List<Product> products;
 
     private Boolean isDeleted;
     private Date createOn;
