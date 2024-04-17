@@ -34,7 +34,7 @@ public class SignUpServiceImpl implements SignUpService {
                 signUp.setIsDeleted(false);
                 signUp.setCreateOn(new Date());
                 signUpRepository.save(signUp);
-                return new SignUpResponse(200,"New user created",signUpRequest.getFullName());
+                return new SignUpResponse(200,"New user created",signUp);
             }else{
                 return new SignUpResponse(404,"Phone number already exists",signUpRequest.getPhoneNo());
             }
