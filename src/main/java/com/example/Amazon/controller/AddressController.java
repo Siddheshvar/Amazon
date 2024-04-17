@@ -1,5 +1,7 @@
 package com.example.Amazon.controller;
 
+import com.example.Amazon.Response.AddressResponse;
+import com.example.Amazon.Response.BaseResponse;
 import com.example.Amazon.entity.Address;
 import com.example.Amazon.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,31 +18,28 @@ public class AddressController {
     private AddressService addressService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveAddress(@RequestBody Address address){
-        addressService.saveAddress(address);
-        return ResponseEntity.ok("Address is saved!");
+    public BaseResponse saveAddress(@RequestBody AddressResponse addressResponse){
+        return addressService.saveAddress(addressResponse);
     }
 
     @GetMapping("/getall")
-    public List<Address> getAllAddresses(){
-        return new ArrayList<Address>(addressService.getAllAddress());
+    public BaseResponse getAllAddresses(){
+        return addressService.getAllAddress();
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Address> getAddressById(@PathVariable("id") Integer id){
-        return new ResponseEntity<Address>(addressService.getAddressById(id), HttpStatus.OK);
+    public BaseResponse getAddressById(@PathVariable("id") Integer id){
+        return addressService.getAddressById(id);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateAddressById(@RequestBody Address address,
+    public BaseResponse updateAddressById(@RequestBody AddressResponse address,
                                                     @PathVariable("id")Integer id){
-        addressService.updateAddressById(address,id);
-        return ResponseEntity.ok("Address of id no "+id+" is updated!");
+        return addressService.updateAddressById(address,id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteAddressById(@PathVariable("id")Integer id){
-        addressService.deleteAddressById(id);
-        return ResponseEntity.ok("Address od id no "+id+"  is deleted!");
+    public BaseResponse deleteAddressById(@PathVariable("id")Integer id){
+        return addressService.deleteAddressById(id);
     }
 }

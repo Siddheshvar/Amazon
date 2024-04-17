@@ -1,12 +1,14 @@
 package com.example.Amazon.service;
 
-import com.example.Amazon.entity.Address;
+import com.example.Amazon.Response.AddressResponse;
+import com.example.Amazon.Response.BaseResponse;
+
 import java.util.List;
 
 public interface AddressService {
-    Address saveAddress(Address address);
-    List<Address> getAllAddress();
-    Address getAddressById(Integer id);
-    Address updateAddressById(Address address,Integer id);
-    void deleteAddressById(Integer id);
+    BaseResponse saveAddress(AddressResponse addressResponse);
+    BaseResponse<List<AddressResponse>> getAllAddress();
+    BaseResponse getAddressById(Integer id);
+    BaseResponse updateAddressById(AddressResponse addressResponse,Integer id);
+    BaseResponse deleteAddressById(Integer id);
 }
