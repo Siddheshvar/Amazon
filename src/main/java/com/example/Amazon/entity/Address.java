@@ -3,6 +3,7 @@ package com.example.Amazon.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,13 +25,17 @@ public class Address {
     private String state;
     private String country;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private SignUp signUp;
 
-    @OneToMany(mappedBy = "shippingAddress", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "shippingAddress", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Order> orders;
 
 
+
+    private Boolean isDeleted;
+    private Date createOn;
+    private Date updateOn;
 
 }

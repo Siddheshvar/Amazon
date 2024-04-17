@@ -1,5 +1,6 @@
 package com.example.Amazon.ServiceImpl;
 
+import com.example.Amazon.Response.AddressResponse;
 import com.example.Amazon.entity.Address;
 import com.example.Amazon.repository.AddressRepository;
 import com.example.Amazon.service.AddressService;
@@ -7,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AddressServiceImpl implements AddressService {
@@ -25,8 +27,23 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address getAddressById(Integer id) {
-        return addressRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Oops... address not found!"));
+        Optional<Address> address = addressRepository.findByIsDeletedAndId(false,id);
+        if (address.isPresent()) {
+            AddressResponse addressResponse = new AddressResponse();
+            addressResponse.setId(address.get().getId());
+            addressResponse.setFlatOrHouseNo(address.get().getFlatOrHouseNo());
+            addressResponse.setResidencyOrApartment(address.get().getResidencyOrApartment());
+            addressResponse.setAreaOrColony(address.get().getAreaOrColony());
+            addressResponse.setTownOrVillage(address.get().getTownOrVillage());
+            addressResponse.setCity(address.get().getCity());
+            addressResponse.setSubDistrict(address.get().getSubDistrict());
+            addressResponse.setDistrict(address.get().getDistrict());
+            addressResponse.setPinCode(address.get().getPinCode());
+            addressResponse.setState(address.get().getState());
+            addressResponse.setCountry(address.get().getCountry());
+
+        }
+        return null;
     }
 
     @Override
