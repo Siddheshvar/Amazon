@@ -2,6 +2,7 @@ package com.example.Amazon.entity;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -14,11 +15,15 @@ public class OrderItem {
 
     private Integer itemQuantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+
+    private Boolean isDeleted;
+    private Date createOn;
+    private Date updateOn;
 }

@@ -1,5 +1,7 @@
 package com.example.Amazon.controller;
 
+import com.example.Amazon.Requests.OrderRequest;
+import com.example.Amazon.Response.BaseResponse;
 import com.example.Amazon.entity.Order;
 import com.example.Amazon.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,30 +18,27 @@ public class OrderController {
     private OrdersService ordersService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveOrder(@RequestBody Order order){
-        ordersService.saveOrder(order);
-        return ResponseEntity.ok("");
+    public BaseResponse saveOrder(@RequestBody OrderRequest orderRequest){
+        return ordersService.saveOrder(orderRequest);
     }
-    @GetMapping("/getall")
-    public List<Order> getAllOrder(){
-        return new ArrayList<Order>(ordersService.getAllOrder());
+    @GetMapping("/getAll")
+    public BaseResponse getAllOrder(){
+        return ordersService.getAllOrder();
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable("id")Integer id){
-        return new ResponseEntity<>(ordersService.getOrderById(id),HttpStatus.OK);
+    public BaseResponse getOrderById(@PathVariable("id")Integer id){
+        return ordersService.getOrderById(id);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateOrderById(@PathVariable("id")Integer id,
-                                                  @RequestBody Order order){
-        ordersService.updateOrderById(order,id);
-        return ResponseEntity.ok("");
+    public BaseResponse updateOrderById(@PathVariable("id")Integer id,
+                                                  @RequestBody OrderRequest orderRequest){
+        return ordersService.updateOrderById(orderRequest,id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteOrderById(Integer id){
-        ordersService.deleteOrderById(id);
-        return ResponseEntity.ok("");
+    public BaseResponse deleteOrderById(Integer id){
+        return ordersService.deleteOrderById(id);
     }
 }

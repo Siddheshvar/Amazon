@@ -22,6 +22,9 @@ public class Order {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private SignUp signUp;
 
+    private Boolean isDeleted;
+    private Date createOn;
+    private Date updateOn;
 }

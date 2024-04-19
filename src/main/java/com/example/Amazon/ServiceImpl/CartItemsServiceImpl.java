@@ -1,13 +1,14 @@
-package com.example.Amazon.service;
+package com.example.Amazon.ServiceImpl;
 
 import com.example.Amazon.entity.CartItems;
 import com.example.Amazon.repository.CartItemsRepository;
+import com.example.Amazon.service.CartItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CartItemsServiceImpl implements CartItemsService{
+public class CartItemsServiceImpl implements CartItemsService {
     @Autowired
     private CartItemsRepository cartItemsRepository;
 
@@ -32,7 +33,9 @@ public class CartItemsServiceImpl implements CartItemsService{
         CartItems existingItem = cartItemsRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Data not found!"));
 
-        existingItem.setCartItemId(item.getCartItemId());
+        existingItem.setItemQty(item.getItemQty());
+        existingItem.setCart(item.getCart());
+
 
         return this.cartItemsRepository.save(existingItem);
     }

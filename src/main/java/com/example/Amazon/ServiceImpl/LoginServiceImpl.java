@@ -27,7 +27,7 @@ public class LoginServiceImpl implements LoginService {
 
             Boolean password = passwordEncoder.matches(loginRequest.getPassword(),customer.get().getCreatePass());
             if (email && password){
-                return new LoginResponse(200,"You are logged in successfully",null);
+                return new LoginResponse(200,"You are logged in successfully",customer);
             }   else{
                 return new LoginResponse(404,"Invalid email or password",null);
             }

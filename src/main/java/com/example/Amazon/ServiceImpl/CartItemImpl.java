@@ -1,4 +1,4 @@
-package com.example.Amazon.service.ServiceImpl;
+package com.example.Amazon.ServiceImpl;
 
 import com.example.Amazon.entity.CartItems;
 import com.example.Amazon.repository.CartItemRepository;
@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

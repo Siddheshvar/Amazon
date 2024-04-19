@@ -1,5 +1,6 @@
 package com.example.Amazon.controller;
 
+import com.example.Amazon.Response.BaseResponse;
 import com.example.Amazon.entity.Cart;
 import com.example.Amazon.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,31 +19,28 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveCart(@RequestBody Cart cart){
-        cartService.saveCart(cart);
-        return ResponseEntity.ok("");
+    public BaseResponse saveCart(@RequestBody Cart cart){
+        return cartService.saveCart(cart);
     }
 
-    @GetMapping("/getall")
-    public List<Cart> getAllCart(){
-        return new ArrayList<Cart>(cartService.getAllCart());
+    @GetMapping("/getAll")
+    public BaseResponse getAllCart(){
+        return cartService.getAllCart();
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Cart> getCartById(@PathVariable("id")Long id){
-        return new ResponseEntity<Cart>(cartService.getCartById(id), HttpStatus.OK);
+    public BaseResponse getCartById(@PathVariable("id")Integer id){
+        return cartService.getCartById(id);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateCartById(@PathVariable("id")Long id,
+    public BaseResponse updateCartById(@PathVariable("id")Integer id,
                                                  @RequestBody Cart cart){
-        cartService.updateCartById(cart,id);
-        return ResponseEntity.ok("");
+        return cartService.updateCartById(cart,id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteCartById(@PathVariable("id")Long id){
-        cartService.deleteCartById(id);
-        return ResponseEntity.ok("");
+    public BaseResponse deleteCartById(@PathVariable("id")Integer id){
+        return cartService.deleteCartById(id);
     }
 }
