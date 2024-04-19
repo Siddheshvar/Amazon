@@ -37,8 +37,8 @@ public class SignUp {
     @OneToMany(mappedBy = "signUp")
     List<Order> orders;
 
-    @OneToMany(mappedBy = "signUp")
-    private List<Address> address;
+//    @OneToMany(mappedBy = "signUp")
+//    private List<Address> address;
 
     private Boolean isDeleted;
     private Date createOn;

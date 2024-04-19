@@ -1,6 +1,7 @@
 package com.example.Amazon.ServiceImpl;
 
 import com.example.Amazon.Requests.SignUpRequest;
+import com.example.Amazon.Response.BaseResponse;
 import com.example.Amazon.Response.SignUpResponse;
 import com.example.Amazon.entity.SignUp;
 import com.example.Amazon.repository.SignUpRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +23,7 @@ public class SignUpServiceImpl implements SignUpService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public SignUpResponse newSignUp(SignUpRequest signUpRequest) {
+    public BaseResponse newSignUp(SignUpRequest signUpRequest) {
         Optional<SignUp> cEmail = signUpRepository.findByIsDeletedAndEmailId(false,signUpRequest.getEmailId());
         if (!cEmail.isPresent()) {
             Optional<SignUp> cPhone = signUpRepository.findByIsDeletedAndPhoneNo(false,signUpRequest.getPhoneNo());
@@ -34,39 +36,55 @@ public class SignUpServiceImpl implements SignUpService {
                 signUp.setIsDeleted(false);
                 signUp.setCreateOn(new Date());
                 signUpRepository.save(signUp);
-                return new SignUpResponse(200,"New user created",signUp);
+                return new BaseResponse(200,"New user created",signUp);
             }else{
-                return new SignUpResponse(404,"Phone number already exists",signUpRequest.getPhoneNo());
+                return new BaseResponse(404,"Phone number already exists",signUpRequest.getPhoneNo());
             }
         }else {
-            return new SignUpResponse(404,"Email id already exists",signUpRequest.getEmailId());
+            return new BaseResponse(404,"Email id already exists",signUpRequest.getEmailId());
         }
     }
 
     @Override
-    public SignUpResponse<List<SignUp>> getAllUsers() {
-        List<SignUp> list = signUpRepository.findAll();
-        if (!list.isEmpty() && list != null) {
-            return new SignUpResponse<List<SignUp>>(200,"",list);
+    public BaseResponse<List<SignUpResponse>> getAllUsers() {
+        List<SignUp> list = signUpRepository.findByIsDeleted(false);
+        if (!list.isEmpty() && list.size() > 0) {
+            List<SignUpResponse> signUpResponseArrayList = new ArrayList<>();
+            for (SignUp signUp : list) {
+                SignUpResponse signUpResponse = new SignUpResponse();
+                signUpResponse.setId(signUp.getId());
+                signUpResponse.setFullName(signUp.getFullName());
+                signUpResponse.setPhoneNo(signUp.getPhoneNo());
+                signUpResponse.setEmailId(signUp.getEmailId());
+
+                signUpResponseArrayList.add(signUpResponse);
+            }
+            return new BaseResponse<List<SignUpResponse>>(200,"",signUpResponseArrayList);
         }else {
-            return new SignUpResponse(404,"No user found!",null);
+            return new BaseResponse(404,"No users found!",null);
         }
     }
 
 
     @Override
-    public SignUpResponse getUserById(Integer id) {
+    public BaseResponse getUserById(Integer id) {
         Optional<SignUp> user = signUpRepository.findByIsDeletedAndId(false,id);
         if (user.isPresent() && user!=null) {
-            return new SignUpResponse(200,"Retrieved user",user.get());
+            SignUpResponse signUpResponse = new SignUpResponse();
+            signUpResponse.setId(user.get().getId());
+            signUpResponse.setFullName(user.get().getFullName());
+            signUpResponse.setPhoneNo(user.get().getPhoneNo());
+            signUpResponse.setEmailId(user.get().getEmailId());
+
+            return new BaseResponse(200,"Retrieved user",signUpResponse);
         }else{
-            return new SignUpResponse(404,"No user found!",null);
+            return new BaseResponse(404,"No user found!",null);
         }
     }
 
 
     @Override
-    public SignUpResponse updateUserById(SignUpRequest signUpRequest, Integer id) {
+    public BaseResponse updateUserById(SignUpRequest signUpRequest, Integer id) {
         Optional<SignUp> user = signUpRepository.findByIsDeletedAndId(false,id);
         if (user.isPresent() && user!=null){
             Optional<SignUp> eUser = signUpRepository.findByIsDeletedAndEmailId(false, signUpRequest.getEmailId());
@@ -81,26 +99,26 @@ public class SignUpServiceImpl implements SignUpService {
                     user.get().setIsDeleted(false);
                     user.get().setUpdateOn(new Date());
                     signUpRepository.save(user.get());
-                    return new SignUpResponse(200,"Updated user",user.get().getFullName());
+                    return new BaseResponse(200,"Updated user",user.get().getFullName());
                 }else{
-                    return new SignUpResponse(404,"Phone number already exists", signUpRequest.getPhoneNo());
+                    return new BaseResponse(404,"Phone number already exists", signUpRequest.getPhoneNo());
                 }
             }else{
-                return new SignUpResponse(404,"Email id already exists", signUpRequest.getEmailId());
+                return new BaseResponse(404,"Email id already exists", signUpRequest.getEmailId());
             }
         }else {
-            return new SignUpResponse(404,"No user found!",null);
+            return new BaseResponse(404,"No user found!",null);
         }
     }
 
     @Override
-    public SignUpResponse deleteUserById(Integer id) {
+    public BaseResponse deleteUserById(Integer id) {
         Optional<SignUp> user = signUpRepository.findByIsDeletedAndId(false,id);
         if (user.isPresent() && user!=null) {
             signUpRepository.deleteById(id);
-            return new SignUpResponse(200,"Deleted user",user.get().getFullName());
+            return new BaseResponse(200,"Deleted user",user.get().getFullName());
         }else {
-            return new SignUpResponse(404,"No user found!",null);
+            return new BaseResponse(404,"No user found!",null);
         }
     }
 }
